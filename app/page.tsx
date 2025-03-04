@@ -8,7 +8,7 @@ import { authClient } from "@/lib/auth-client";
 export default function Home() {
   const router = useRouter();
   return (
-    <div className="space-y-2 flex flex-col items-center justify-center">
+    <div className="space-y-2 flex flex-col items-center justify-center h-full w-full">
       <Button
         onClick={async () => {
           authClient.oneTap({
@@ -34,7 +34,7 @@ export default function Home() {
       <Button
         onClick={async () => {
           const { data, error } = await authClient.signIn.magicLink({
-            email: "user@email.com",
+            email: "mndebele.themba@gmail.com",
             callbackURL: "/dashboard", //redirect after successful login (optional)
           });
 

@@ -14,7 +14,9 @@ export const auth = betterAuth({
     },
   },
   plugins: [
-    oneTap(),
+    oneTap({
+      clientId: process.env.GOOGLE_CLIENT_ID as string,
+    }),
     magicLink({
       sendMagicLink: async ({ email, token, url }, request) => {
         // send email to user
