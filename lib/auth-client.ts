@@ -1,14 +1,9 @@
 import { createAuthClient } from "better-auth/client";
 import { magicLinkClient, oneTapClient } from "better-auth/client/plugins";
-import getEnvSafely from "./get-env-safely";
-
-console.log(getEnvSafely("GOOGLE_CLIENT_ID"));
-
-const googleClientId = process.env.GOOGLE_CLIENT_ID;
-console.log(googleClientId);
 
 export const authenticate = async () => {
   return createAuthClient({
+    baseURL: process.env.BETTER_AUTH_URL as string,
     plugins: [
       oneTapClient({
         clientId: process.env.GOOGLE_CLIENT_ID as string,
