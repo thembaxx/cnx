@@ -15,12 +15,12 @@ export default function Home() {
           const authClient = await authenticate();
 
           authClient.oneTap({
-            // fetchOptions: {
-            //   onSuccess: () => {
-            //     // For example, use a router to navigate without a full reload:
-            //     router.push("/dashboard");
-            //   },
-            // },
+            fetchOptions: {
+              onSuccess: () => {
+                // For example, use a router to navigate without a full reload:
+                router.push("/dashboard");
+              },
+            },
             onPromptNotification: (notification) => {
               console.warn(
                 "Prompt was dismissed or skipped. Consider displaying an alternative sign-in option.",
