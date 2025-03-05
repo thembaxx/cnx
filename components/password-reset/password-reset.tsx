@@ -29,6 +29,7 @@ import {
 } from "@/components/ui/drawer";
 
 import { Button } from "../ui/button";
+import Loader from "../ui/loader";
 
 type Props = {
   children?: React.ReactNode;
@@ -146,8 +147,16 @@ function PasswordReset({ children, open, setOpen, email }: Props) {
           )}
         </div>
         <DrawerFooter>
-          <Button onClick={form.handleSubmit(onSubmit)}>
-            Reset your password
+          <Button
+            className="w-full relative"
+            onClick={form.handleSubmit(onSubmit)}
+          >
+            <>Reset your password</>
+            {loading && (
+              <div className="absolute left-3">
+                <Loader variant="dark" />
+              </div>
+            )}
           </Button>
           <DrawerClose className="w-full" asChild>
             <Button className="w-full" variant="outline">

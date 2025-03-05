@@ -24,6 +24,7 @@ import { checkEmailExists } from "@/actions";
 
 import PasswordReset from "@/components/password-reset/password-reset";
 import { SolarQuestionCircleLinear } from "@/lib/icons";
+import Loader from "@/components/ui/loader";
 
 const FormSchema = z.object({
   email: z.string().email(),
@@ -33,6 +34,7 @@ const FormSchema = z.object({
 function AuthForm() {
   const router = useRouter();
 
+  const [loading, setLoading] = useState(false);
   const [emailExists, setEmailExists] = useState(false);
   const [resetPasswordOpen, setResetPasswordOpen] = useState(false);
 
@@ -46,6 +48,8 @@ function AuthForm() {
 
   async function onSubmit(values: z.infer<typeof FormSchema>) {
     const { email, password } = values;
+
+    setLoading(true);
 
     if (emailExists && password) {
       const { error } = await authClient.signIn.email({
@@ -68,11 +72,14 @@ function AuthForm() {
       const res = await checkEmailExists(email);
 
       if (!res) {
+        setLoading(false);
         router.replace("/sign-up");
       } else {
         setEmailExists(true);
       }
     }
+
+    setLoading(false);
   }
 
   return (
@@ -117,8 +124,13 @@ function AuthForm() {
             />
           )}
         </div>
-        <Button className="w-full" type="submit">
-          {`${emailExists ? "Sign In" : "Continue with Email"}`}
+        <Button className="w-full relative" type="submit">
+          {loading && (
+            <div className="absolute left-3">
+              <Loader variant="dark" />
+            </div>
+          )}
+          <>{`${emailExists ? "Sign In" : "Continue with Email"}`}</>
         </Button>
         {emailExists && (
           <div className="flex w-full">

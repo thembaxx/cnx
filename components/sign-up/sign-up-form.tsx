@@ -97,6 +97,8 @@ function SignUpForm() {
         },
       }
     );
+
+    setLoading(false);
   }
 
   return (
@@ -207,8 +209,8 @@ function SignUpForm() {
           <Button type="submit" className="w-full relative" disabled={loading}>
             <span>Create free account</span>
             {loading && (
-              <div className="absolute left-2">
-                <Loader />
+              <div className="absolute left-3">
+                <Loader variant="dark" />
               </div>
             )}
           </Button>
