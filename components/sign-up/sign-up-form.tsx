@@ -22,6 +22,9 @@ import { Input } from "@/components/ui/input";
 import { authClient } from "@/lib/auth-client";
 import Loader from "../ui/loader";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import PasswordReset from "../password-reset/password-reset";
+import { SolarQuestionCircleLinear } from "@/lib/icons";
 
 const formSchema = z.object({
   first_name: z.string().min(2).default(""),
@@ -31,8 +34,12 @@ const formSchema = z.object({
 });
 
 function SignUpForm() {
+  const router = useRouter();
+
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [resetPasswordOpen, setResetPasswordOpen] = useState(false);
+  const [showForgotPassword, setShowforgotPassword] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -46,6 +53,10 @@ function SignUpForm() {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    // Check if email already exists
+    // Suggest forgot password
+    setShowforgotPassword(false);
+
     setLoading(true);
 
     const { first_name, last_name, email, password } = values;
@@ -72,10 +83,17 @@ function SignUpForm() {
           toast("Success", { description: "Account has been created." });
 
           setLoading(false);
+
+          router.replace("/dashboard");
         },
         onError: (ctx) => {
           toast("Error", { description: ctx.error.message });
           setLoading(false);
+
+          if (ctx?.error?.status === 422) {
+            setShowforgotPassword(true);
+            setResetPasswordOpen(true);
+          }
         },
       }
     );
@@ -194,6 +212,25 @@ function SignUpForm() {
               </div>
             )}
           </Button>
+
+          {showForgotPassword && (
+            <div className="flex w-full">
+              <Button
+                className="text-primary text-[0.85rem]"
+                variant="link"
+                type="button"
+                size="sm"
+                onClick={() => setResetPasswordOpen(!resetPasswordOpen)}
+              >
+                <SolarQuestionCircleLinear className="w-5 h-5 text-[#666]" />
+                <>Forgot your password?</>
+              </Button>
+              <PasswordReset
+                open={resetPasswordOpen}
+                setOpen={setResetPasswordOpen}
+              />
+            </div>
+          )}
         </div>
       </form>
     </Form>

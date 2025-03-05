@@ -22,6 +22,9 @@ import { useState } from "react";
 import { authClient } from "@/lib/auth-client";
 import { checkEmailExists } from "@/actions";
 
+import PasswordReset from "@/components/password-reset/password-reset";
+import { SolarQuestionCircleLinear } from "@/lib/icons";
+
 const FormSchema = z.object({
   email: z.string().email(),
   password: z.string().optional(),
@@ -31,6 +34,7 @@ function AuthForm() {
   const router = useRouter();
 
   const [emailExists, setEmailExists] = useState(false);
+  const [resetPasswordOpen, setResetPasswordOpen] = useState(false);
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -116,6 +120,24 @@ function AuthForm() {
         <Button className="w-full" type="submit">
           {`${emailExists ? "Sign In" : "Continue with Email"}`}
         </Button>
+        {emailExists && (
+          <div className="flex w-full">
+            <Button
+              className="text-primary text-[0.85rem]"
+              variant="link"
+              type="button"
+              size="sm"
+              onClick={() => setResetPasswordOpen(!resetPasswordOpen)}
+            >
+              <SolarQuestionCircleLinear className="w-5 h-5 text-[#666]" />
+              <>Forgot your password?</>
+            </Button>
+            <PasswordReset
+              open={resetPasswordOpen}
+              setOpen={setResetPasswordOpen}
+            />
+          </div>
+        )}
       </form>
     </Form>
   );
