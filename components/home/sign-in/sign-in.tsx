@@ -22,7 +22,7 @@ function SignIn() {
   //const router = useRouter();
 
   return (
-    <Card className="border-none shadow-2xl rounded-3xl">
+    <Card className="shadow-2xl rounded-3xl">
       <CardHeader className="h-0 p-0 hidden">
         <CardTitle>Sign in</CardTitle>
       </CardHeader>
