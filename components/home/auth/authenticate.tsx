@@ -1,9 +1,5 @@
 "use client";
 
-// import { useRouter } from "next/navigation";
-
-import { authenticate } from "@/lib/auth-client";
-
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 
@@ -14,25 +10,23 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import SignInForm from "./sign-in-form";
+
+import AuthForm from "./auth-form";
 import { siteConfig } from "@/config/site";
 import Link from "next/link";
+import { authClient } from "@/lib/auth-client";
 
-function SignIn() {
-  //const router = useRouter();
-
+function Authenticate() {
   return (
     <Card className="shadow-md/20 rounded-3xl">
       <CardHeader className="h-0 p-0 hidden">
         <CardTitle>Sign in</CardTitle>
       </CardHeader>
-      <CardContent className="">
+      <CardContent>
         <div className="space-y-2 flex flex-col items-center justify-center h-full w-full">
           <Button
             className="w-full"
             onClick={async () => {
-              const authClient = await authenticate();
-
               authClient.signIn.social({
                 provider: "google",
                 callbackURL: "/dashboard",
@@ -47,47 +41,7 @@ function SignIn() {
             <span className="text-muted-foreground text-xs uppercase">or</span>
           </div>
 
-          <SignInForm />
-
-          {/* <Button
-          className="w-full"
-          onClick={async () => {
-            const authClient = await authenticate();
-
-            authClient.oneTap({
-              fetchOptions: {
-                onSuccess: () => {
-                  router.push("/dashboard");
-                },
-              },
-              onPromptNotification: (notification) => {
-                console.warn(
-                  "Prompt was dismissed or skipped. Consider displaying an alternative sign-in option.",
-                  notification
-                );
-                // Render your alternative UI here
-              },
-            });
-          }}
-        >
-          One Tap Sign in
-        </Button>
-
-        <Button
-          className="w-full"
-          onClick={async () => {
-            const authClient = await authenticate();
-
-            const { data, error } = await authClient.signIn.magicLink({
-              email: "mndebele.themba@gmail.com",
-              callbackURL: "/dashboard", //redirect after successful login (optional)
-            });
-
-            console.log(data, error);
-          }}
-        >
-          Sign in with Magic Link
-        </Button> */}
+          <AuthForm />
         </div>
       </CardContent>
       <CardFooter>
@@ -113,4 +67,4 @@ function SignIn() {
   );
 }
 
-export default SignIn;
+export default Authenticate;

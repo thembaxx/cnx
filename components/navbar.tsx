@@ -91,22 +91,24 @@ const UserCircleIcon = (props: React.SVGProps<SVGSVGElement>) => (
 
 function Navbar() {
   return (
-    <nav className="sticky top-0 z-20 bg-background/80 backdrop-blur-2xl h-16 shrink-0 flex items-center px-4 justify-between">
-      <div className="flex items-center">
-        <Button className="p-0" variant="ghost">
-          <MenuIcon className="!w-6 !h-6" />
-        </Button>
-        <Link className="font-extrabold text-[0.90rem] uppercase" href="/">
-          <span>{siteConfig.name}</span>
-        </Link>
-      </div>
-      <div className="flex items-center gap-2">
-        <Button className="p-0" variant="ghost">
-          <NotificationIcon className="!w-6 !h-6" />
-        </Button>
-        <Button className="p-0" variant="ghost">
-          <UserCircleIcon className="!w-6 !h-6" />
-        </Button>
+    <nav className="sticky top-0 z-20 bg-background/80 backdrop-blur-2xl h-16 shrink-0 flex justify-center">
+      <div className="w-full flex items-center px-4 justify-between max-w-2xl">
+        <div className="flex items-center">
+          <Button className="p-0" variant="ghost">
+            <MenuIcon className="!w-6 !h-6" />
+          </Button>
+          <Link className="font-extrabold text-[0.90rem] uppercase" href="/">
+            <span>{siteConfig.name}</span>
+          </Link>
+        </div>
+        <div className="flex items-center gap-2">
+          <Button className="p-0" variant="ghost">
+            <NotificationIcon className="!w-6 !h-6" />
+          </Button>
+          <Button className="p-0" variant="ghost">
+            <UserCircleIcon className="!w-6 !h-6" />
+          </Button>
+        </div>
       </div>
     </nav>
   );

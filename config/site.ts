@@ -3,14 +3,14 @@ export type SiteConfig = typeof siteConfig;
 export const siteConfig = {
   name: "Yunite",
   description: "Hire. Build. Simplify Your Home Construction Journey",
-  version: "0.0.0.15",
+  version: "0.0.0.16",
   baseUrl:
     process.env.NODE_ENV === "production"
-      ? "https://themba.dev"
+      ? "https://cnx-two.vercel.app/"
       : "http://localhost:3000",
   navItems: [
     {
-      label: "Let’s connect",
+      label: "Let's connect",
       href: "/connect",
     },
     {

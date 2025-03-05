@@ -1,8 +1,16 @@
-// app/actions.ts
-"use server"; // Mark this as a server action
+"use server";
 
-import { authenticate } from "@/lib/auth-client";
+import { db } from "@vercel/postgres";
 
-export async function handleAuth() {
-  return await authenticate(); // This will run on the server
+const client = await db.connect();
+
+export async function checkEmailExists(email: string) {
+  try {
+    const res =
+      await client.sql`SELECT * FROM "user" WHERE "email" = ${email} LIMIT 1`;
+    return res && res.rowCount && res.rowCount > 0;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
 }
