@@ -46,7 +46,7 @@ const headlines = [
 ];
 
 export const headlineFlag = flag<string>({
-  key: "greeting",
+  key: "heading",
   options: [
     {
       label: "Professional",
@@ -73,7 +73,7 @@ export const headlineFlag = flag<string>({
 });
 
 export const subheadlineFlag = flag<string>({
-  key: "greeting",
+  key: "subheading",
   options: [
     {
       label: "Professional",

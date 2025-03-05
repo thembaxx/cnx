@@ -15,16 +15,18 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import SignInForm from "./sign-in-form";
+import { siteConfig } from "@/config/site";
+import Link from "next/link";
 
 function SignIn() {
   //const router = useRouter();
 
   return (
-    <Card>
-      <CardHeader>
+    <Card className="border-none shadow-2xl">
+      <CardHeader className="h-0 p-0 hidden">
         <CardTitle>Sign in</CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="">
         <div className="space-y-2 flex flex-col items-center justify-center h-full w-full">
           <Button
             className="w-full"
@@ -37,12 +39,12 @@ function SignIn() {
               });
             }}
           >
-            <Image src="/brands/google.svg" width={20} height={20} alt="" />
+            <Image src="/brands/google.svg" width={16} height={16} alt="" />
             <span className="font-semibold">Continue with Google</span>
           </Button>
 
-          <div className="w-full text-center py-2">
-            <span className="text-muted-foreground">or</span>
+          <div className="w-full text-center py-1.5">
+            <span className="text-muted-foreground text-xs uppercase">or</span>
           </div>
 
           <SignInForm />
@@ -90,9 +92,20 @@ function SignIn() {
       </CardContent>
       <CardFooter>
         <div className="pt-6">
-          <div className="text-xs inline-flex">
-            By continuing, you agree to Anthropic&apos;s Consumer Terms and
-            Usage Policy, and acknowledge their Privacy Policy.
+          <div className="text-xs inline-block text-center text-pretty leading-5 tracking-wide">
+            By continuing, you agree to {siteConfig.name}&apos;s{" "}
+            <Link className="underline" href="/">
+              Consumer Terms
+            </Link>
+            and{" "}
+            <Link className="underline" href="/">
+              Usage Policy
+            </Link>
+            , and acknowledge their{" "}
+            <Link className="underline" href="/">
+              Privacy Policy
+            </Link>
+            .
           </div>
         </div>
       </CardFooter>

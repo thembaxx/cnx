@@ -2,6 +2,7 @@
 
 import { siteConfig } from "@/config/site";
 import RotatingText from "./rotating-text";
+import Image from "next/image";
 
 type Props = {
   headline: string;
@@ -45,14 +46,17 @@ const houseBuildingJobs = [
 function Header({ headline, subheadline }: Props) {
   return (
     <header className="flex flex-col items-center space-y-8">
-      <div className="pb-8 flex items-center gap-2">
-        <p>{siteConfig.name}</p>
+      <div className="pb-8 flex items-center gap-1">
+        <div className="w-9 h-9 flex items-center justify-center">
+          <Image src="yunite.svg" height={24} width={24} alt="" />
+        </div>
+        <p className="font-medium">{siteConfig.name}</p>
       </div>
       <div className="flex items-center gap-2">
-        <h2 className="font-semibold text-lg">Build</h2>
+        <h2 className="font-semibold">Build</h2>
         <RotatingText
           texts={houseBuildingJobs}
-          mainClassName="px-2 sm:px-2 md:px-3 bg-black/80 font-medium truncate text-white text-sm overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-md"
+          mainClassName="px-2 sm:px-2 md:px-3 bg-black/80 font-medium truncate text-white text-[0.85rem] overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-md"
           staggerFrom={"last"}
           initial={{ y: "100%" }}
           animate={{ y: 0 }}
@@ -63,11 +67,11 @@ function Header({ headline, subheadline }: Props) {
           rotationInterval={4000}
         />
       </div>
-      <div className="space-y-4">
-        <h1 className="text-4xl font-extrabold text-center text-pretty">
+      <div className="space-y-3">
+        <h1 className="text-2xl font-extrabold text-center text-pretty">
           {headline}
         </h1>
-        <p className="text-lg text-center text-pretty">{subheadline}</p>
+        <p className="text-[0.95rem] text-center text-pretty">{subheadline}</p>
       </div>
     </header>
   );
