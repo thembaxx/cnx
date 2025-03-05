@@ -93,7 +93,7 @@ function PasswordReset({ children, open, setOpen, email }: Props) {
         <DrawerHeader>
           <DrawerTitle>Did you forget your password?</DrawerTitle>
           <DrawerDescription>
-            We will send an email to reset your password.
+            We will send an email to help you reset your password.
           </DrawerDescription>
         </DrawerHeader>
         <div className="p-6">
@@ -134,7 +134,7 @@ function PasswordReset({ children, open, setOpen, email }: Props) {
                       <FormControl>
                         <Input
                           placeholder="name@example.com"
-                          className="text-base"
+                          className="text-base placeholder:text-sm"
                           {...field}
                         />
                       </FormControl>

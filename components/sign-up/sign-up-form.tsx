@@ -228,6 +228,7 @@ function SignUpForm() {
                 <>Forgot your password?</>
               </Button>
               <PasswordReset
+                email={form.getValues("email")}
                 open={resetPasswordOpen}
                 setOpen={setResetPasswordOpen}
               />
