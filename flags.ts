@@ -50,26 +50,26 @@ export const headlineFlag = flag<string>({
   options: [
     {
       label: "Professional",
-      value: "Unify: Precision Workforce for Your Construction Vision",
+      value: "Precision Workforce for Your Construction Vision",
     },
     {
       label: "Modern",
-      value: "Unify: Build Your Dream, One Expert at a Time",
+      value: "Build Your Dream, One Expert at a Time",
     },
     {
       label: "Empowering",
-      value: "Unify: Connecting Builders, Transforming Spaces",
+      value: "Connecting Builders, Transforming Spaces",
     },
     {
       label: "Dynamic",
-      value: "Unify: Craft Your Construction Crew Instantly",
+      value: "Craft Your Construction Crew Instantly",
     },
     {
       label: "Innovative",
-      value: "Unify: The Construction Talent Network",
+      value: "The Construction Talent Network",
     },
   ],
-  decide: () => "Unify: Precision Workforce for Your Construction Vision",
+  decide: () => "Precision Workforce for Your Construction Vision",
 });
 
 export const subheadlineFlag = flag<string>({

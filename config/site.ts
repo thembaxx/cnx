@@ -1,7 +1,7 @@
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-  name: "Unite",
+  name: "Yunite",
   description: "Hire. Build. Simplify Your Home Construction Journey",
   version: "0.0.0.1",
   baseUrl:

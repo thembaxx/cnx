@@ -1,5 +1,6 @@
 "use client";
 
+import { siteConfig } from "@/config/site";
 import RotatingText from "./rotating-text";
 
 type Props = {
@@ -9,59 +10,49 @@ type Props = {
 
 const houseBuildingJobs = [
   "Site Clearing",
-  "Property Boundary Staking",
   "Soil Testing",
   "Excavation",
-  "Footer Drain Installation",
-  "Utility Line Preparation",
+  "Drain Install",
+  "Utility Line",
   "Ground Compaction",
-  "Concrete Foundation Forming",
+  "Concrete Foundation",
   "Waterproofing",
   "Wall Location Marking",
   "Lumber Cutting",
   "Wall Frame Assembly",
-  "Roof Truss Preparation",
-  "Temporary Bracing",
-  "Electrical Conduit Running",
-  "Rough Plumbing Installation",
-  "HVAC Ductwork Placement",
-  "Low-Voltage System Preparation",
-  "Utility Box Installation",
-  "House Wrap Application",
-  "Window Rough Opening Installation",
-  "Exterior Surface Preparation",
-  "Drip Edge and Flashing Installation",
   "Roof Preparation",
-  "Insulation Installation",
+  "Temporary Bracing",
+  "Electrical",
+  "Plumbing Install",
+  "HVAC Ductw Placement",
+  "Utility Box Install",
+  "House Wrap",
+  "Window Installation",
+  "Exterior Surface Preparation",
+  "Flashing Install",
+  "Insulation Install",
   "Drywall Hanging",
   "Drywall Seam Taping",
-  "Surface Painting Preparation",
-  "Interior Door Frame Installation",
-  "Construction Debris Cleanup",
+  "Surface Painting Prep",
+  "Interior Door Frame",
+  "Debris Cleanup",
   "Site Grading",
-  "Landscaping Preparation",
+  "Landscaping Prep",
   "System Testing",
-  "Final Site Cleanup",
+  "Site Cleanup",
 ];
 
 function Header({ headline, subheadline }: Props) {
-  console.log(headline, subheadline);
-
   return (
     <header className="flex flex-col items-center space-y-8">
-      <div className="space-y-4">
-        <h1 className="text-4xl font-extrabold text-center">
-          Your Instant Construction Crew Marketplace
-        </h1>
-        <p className="text-lg text-center">
-          Hire. Build. Simplify Your Home Construction Journey
-        </p>
+      <div className="pb-8 flex items-center gap-2">
+        <p>{siteConfig.name}</p>
       </div>
       <div className="flex items-center gap-2">
-        <h2 className="font-bold text-2xl">Build</h2>
+        <h2 className="font-semibold text-lg">Build</h2>
         <RotatingText
           texts={houseBuildingJobs}
-          mainClassName="px-2 sm:px-2 md:px-3 bg-blue-500 font-bold truncate text-white text-lg overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg"
+          mainClassName="px-2 sm:px-2 md:px-3 bg-black/80 font-medium truncate text-white text-sm overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-md"
           staggerFrom={"last"}
           initial={{ y: "100%" }}
           animate={{ y: 0 }}
@@ -69,8 +60,14 @@ function Header({ headline, subheadline }: Props) {
           staggerDuration={0.025}
           splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
           transition={{ type: "spring", damping: 30, stiffness: 400 }}
-          rotationInterval={2000}
+          rotationInterval={4000}
         />
+      </div>
+      <div className="space-y-4">
+        <h1 className="text-4xl font-extrabold text-center text-pretty">
+          {headline}
+        </h1>
+        <p className="text-lg text-center text-pretty">{subheadline}</p>
       </div>
     </header>
   );
