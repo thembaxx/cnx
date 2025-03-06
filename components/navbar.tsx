@@ -134,6 +134,13 @@ function ProfileMenu() {
         <DropdownMenuItem onClick={() => authClient.signOut()}>
           Log out
         </DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem>
+          <p className="text-xs text-muted-foreground">
+            {siteConfig.name} © <>{new Date().getFullYear()}</>{" "}
+            {` v${siteConfig.version}`}
+          </p>
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
