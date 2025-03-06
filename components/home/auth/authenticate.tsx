@@ -35,7 +35,7 @@ function Authenticate() {
             }}
           >
             <Image src="/brands/google.svg" width={16} height={16} alt="" />
-            <span className="font-semibold">Continue with Google</span>
+            <span className="font-medium">Continue with Google</span>
           </Button>
 
           <div className="w-full text-center py-1.5">

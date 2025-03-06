@@ -112,7 +112,7 @@ function ProfileMenu() {
     <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
       <DropdownMenuTrigger asChild>
         <Button className="p-0" variant="ghost">
-          <UserCircleIcon className="!w-6 !h-6" />
+          <UserCircleIcon className="!w-6 !h-6 !text-icon" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-56">
@@ -145,7 +145,7 @@ function Navbar() {
       <div className="w-full flex items-center px-4 justify-between max-w-2xl">
         <div className="flex items-center">
           <Button className="p-0" variant="ghost">
-            <MenuIcon className="!w-6 !h-6" />
+            <MenuIcon className="!w-6 !h-6 !text-icon" />
           </Button>
           <Link className="font-extrabold text-[0.90rem] uppercase" href="/">
             <span>{siteConfig.name}</span>
@@ -153,7 +153,7 @@ function Navbar() {
         </div>
         <div className="flex items-center gap-2">
           <Button className="p-0" variant="ghost">
-            <NotificationIcon className="!w-6 !h-6" />
+            <NotificationIcon className="!w-6 !h-6 !text-icon" />
           </Button>
           <ProfileMenu />
         </div>
