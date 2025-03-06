@@ -397,7 +397,7 @@ export function SideMenu({ children }: { children: React.ReactNode }) {
             <SheetTitle>Menu</SheetTitle>
           </VisuallyHidden>
         </SheetHeader>
-        <div className="grow space-y-0">
+        <div className="grow space-y-0 overflow-y-auto">
           <div className="p-4">
             <Profile />
           </div>
@@ -416,7 +416,7 @@ export function SideMenu({ children }: { children: React.ReactNode }) {
           </ul>
           <Separator />
           <div className="p-4 flex items-center gap-3">
-            <PaintBucketIcon className="w-5 h-5 text-[#0062D1]" />
+            <PaintBucketIcon className="w-6 h-6 text-icon" />
             <p className="font-medium grow">Theme</p>
             <ThemeSwitcher />
           </div>
