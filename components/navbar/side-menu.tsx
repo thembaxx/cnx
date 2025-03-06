@@ -398,7 +398,7 @@ export function SideMenu({ children }: { children: React.ReactNode }) {
           </VisuallyHidden>
         </SheetHeader>
         <div className="grow space-y-0 overflow-y-auto">
-          <div className="p-4">
+          <div className="p-4 pt-0">
             <Profile />
           </div>
           <Separator />

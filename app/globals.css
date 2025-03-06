@@ -87,7 +87,7 @@
 
 .dark {
   --icon: oklch(0.8483 0 0);
-  --icon-secondary: oklch(57.61% 0 0);
+  --icon-secondary: oklch(0.5761 0 0);
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.145 0 0);
