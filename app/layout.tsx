@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/navbar/navbar";
 import { Toaster } from "sonner";
 import { siteConfig } from "@/config/site";
+import { Providers } from "./providers";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,16 +27,27 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-screen scheme-light">
+    <html suppressHydrationWarning lang="en">
       <head>
         <meta name="apple-mobile-web-app-title" content={siteConfig.name} />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased h-full font-sans scheme-light flex flex-col overflow-y-auto bg-gradient-to-tr from-neutral-50 to-gray-50`}
+        className={`${geistSans.variable} ${geistMono.variable} bg-[#fafafa] dark:bg-[#0e0e0e] antialiased font-sans flex flex-col overflow-y-auto h-screen selection:bg-blue-300`}
       >
-        <Navbar />
-        <main className="grow">{children}</main>
-        <Toaster />
+        <Providers
+          themeProps={{
+            attribute: "class",
+            defaultTheme: "system",
+            enableSystem: true,
+            disableTransitionOnChange: false,
+          }}
+        >
+          <>
+            <Navbar />
+            <main className="grow">{children}</main>
+            <Toaster />
+          </>
+        </Providers>
       </body>
     </html>
   );

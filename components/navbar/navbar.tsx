@@ -7,30 +7,29 @@ import { siteConfig } from "@/config/site";
 import { SideMenu } from "./side-menu";
 import { ProfileMenu } from "./profile-menu";
 
-const MenuIcon = (props: React.SVGProps<SVGSVGElement>) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 24 24"
-    color="currentColor"
-    fill={"none"}
-    {...props}
-  >
-    <path
-      d="M4 8.5L20 8.5"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M4 15.5L20 15.5"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
-);
+import React from "react";
+import type { SVGProps } from "react";
+
+export function MenuIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      {...props}
+    >
+      <path
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M3 6.001h18m-18 6h18m-18 6h18"
+        strokeWidth={1}
+      ></path>
+    </svg>
+  );
+}
 
 const NotificationIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg

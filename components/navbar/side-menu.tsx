@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/sheet";
 import { Separator } from "../ui/separator";
 import Profile from "../profile";
+import ThemeSwitcher from "../theme-switch";
 
 const SettingsIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
@@ -228,6 +229,116 @@ const CalendarIcon = (props: React.SVGProps<SVGSVGElement>) => (
   </svg>
 );
 
+const NewsIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    width={24}
+    height={24}
+    color="currentColor"
+    className="text-icon"
+    fill={"none"}
+    {...props}
+  >
+    <path
+      d="M18 15V9C18 6.17157 18 4.75736 17.1213 3.87868C16.2426 3 14.8284 3 12 3H8C5.17157 3 3.75736 3 2.87868 3.87868C2 4.75736 2 6.17157 2 9V15C2 17.8284 2 19.2426 2.87868 20.1213C3.75736 21 5.17157 21 8 21H20"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M6 8L14 8"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M6 12L14 12"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M6 16L10 16"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M18 8H19C20.4142 8 21.1213 8 21.5607 8.43934C22 8.87868 22 9.58579 22 11V19C22 20.1046 21.1046 21 20 21C18.8954 21 18 20.1046 18 19V8Z"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
+const HotPriceIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    width={24}
+    height={24}
+    color="currentColor"
+    className="text-icon"
+    fill={"none"}
+    {...props}
+  >
+    <path
+      d="M12 22C16.4183 22 20 18.4183 20 14C20 8 12 2 12 2C11.6117 4.48692 11.2315 5.82158 10 8C8.79908 7.4449 8.5 7 8 5.75C6 8 4 11 4 14C4 18.4183 7.58172 22 12 22Z"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M10 17L14 13"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M10 13H10.009M13.991 17H14"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
+const PaintBucketIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    width={24}
+    height={24}
+    color={"#fafafa"}
+    fill={"none"}
+    {...props}
+  >
+    <path
+      d="M19 12.1294L12.9388 18.207C11.1557 19.9949 10.2641 20.8889 9.16993 20.9877C8.98904 21.0041 8.80705 21.0041 8.62616 20.9877C7.53195 20.8889 6.64039 19.9949 4.85726 18.207L2.83687 16.1811C1.72104 15.0622 1.72104 13.2482 2.83687 12.1294M19 12.1294L10.9184 4.02587M19 12.1294H2.83687M10.9184 4.02587L2.83687 12.1294M10.9184 4.02587L8.89805 2"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M22 20C22 21.1046 21.1046 22 20 22C18.8954 22 18 21.1046 18 20C18 18.8954 20 17 20 17C20 17 22 18.8954 22 20Z"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
 const NavItems: NavItem[] = [
   {
     Icon: UserIcon,
@@ -243,6 +354,16 @@ const NavItems: NavItem[] = [
     Icon: BriefcaseIcon,
     href: "/jobs",
     label: "Jobs",
+  },
+  {
+    Icon: NewsIcon,
+    href: "/blog",
+    label: "Blog",
+  },
+  {
+    Icon: HotPriceIcon,
+    href: "/pricing",
+    label: "Pricing",
   },
 ];
 
@@ -293,9 +414,15 @@ export function SideMenu({ children }: { children: React.ReactNode }) {
               </Link>
             ))}
           </ul>
+          <Separator />
+          <div className="p-4 flex items-center gap-3">
+            <PaintBucketIcon className="w-5 h-5 text-[#0062D1]" />
+            <p className="font-medium grow">Theme</p>
+            <ThemeSwitcher />
+          </div>
         </div>
         <Separator />
-        <SheetFooter className="space-y-4">
+        <SheetFooter className="space-y-4 pt-0">
           <ul>
             {footerNavItems.map(({ Icon, href, label }, index) => (
               <Link

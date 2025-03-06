@@ -14,6 +14,7 @@ import {
 
 import { authClient } from "@/lib/auth-client";
 import Profile from "../profile";
+import Link from "next/link";
 
 export function ProfileMenu({ children }: { children: React.ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,7 +31,9 @@ export function ProfileMenu({ children }: { children: React.ReactNode }) {
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem>Manage profile</DropdownMenuItem>
+          <DropdownMenuItem asChild>
+            <Link href="/profile">Manage profile</Link>
+          </DropdownMenuItem>
           <DropdownMenuItem>Contact support</DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />

@@ -52,11 +52,11 @@ function Header({ headline, subheadline }: Props) {
         </div>
         <p className="font-medium">{siteConfig.name}</p>
       </div>
-      <div className="flex items-center gap-2">
-        <h2 className="font-semibold">Build</h2>
+      <div className="flex flex-col items-center gap-2">
+        <h2 className="font-semibold text-sm">Build</h2>
         <RotatingText
           texts={houseBuildingJobs}
-          mainClassName="px-2 sm:px-2 md:px-3 bg-black/80 font-medium truncate text-white text-[0.85rem] overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-md"
+          mainClassName="px-2 sm:px-2 md:px-3 bg-black/80 dark:bg-white/10 font-medium truncate text-white text-[0.85rem] overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-md"
           staggerFrom={"last"}
           initial={{ y: "100%" }}
           animate={{ y: 0 }}
