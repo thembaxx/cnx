@@ -25,6 +25,7 @@ import { checkEmailExists } from "@/actions";
 import PasswordReset from "@/components/password-reset/password-reset";
 import { SolarQuestionCircleLinear } from "@/lib/icons";
 import Loader from "@/components/ui/loader";
+import Image from "next/image";
 
 const FormSchema = z.object({
   email: z.string().email(),
@@ -36,6 +37,7 @@ function AuthForm() {
 
   const [loading, setLoading] = useState(false);
   const [emailExists, setEmailExists] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const [resetPasswordOpen, setResetPasswordOpen] = useState(false);
 
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -67,6 +69,8 @@ function AuthForm() {
           description: `Logged in as ${email}`,
           richColors: true,
         });
+
+        router.replace("/dashboard");
       }
     } else {
       const res = await checkEmailExists(email);
@@ -111,11 +115,42 @@ function AuthForm() {
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input
-                      className="h-11 text-base placeholder:text-sm"
-                      placeholder="Password"
-                      {...field}
-                    />
+                    <div className="relative">
+                      <Input
+                        className="h-11 text-base pr-12 placeholder:text-sm"
+                        placeholder="Password"
+                        type={showPassword ? "text" : "password"}
+                        {...field}
+                      />
+
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="p-0 absolute h-full w-12 shrink-0 top-0 right-0 rounded-l-none"
+                        type="button"
+                        disabled={loading}
+                        onClick={() => setShowPassword(!showPassword)}
+                      >
+                        {showPassword && (
+                          <Image
+                            aria-hidden={!showPassword}
+                            src="/icons/view-off-stroke-rounded.svg"
+                            alt="Hide password"
+                            width={16}
+                            height={16}
+                          />
+                        )}
+                        {!showPassword && (
+                          <Image
+                            aria-hidden={showPassword}
+                            src="/icons/view-stroke-rounded.svg"
+                            alt="Show password"
+                            width={16}
+                            height={16}
+                          />
+                        )}
+                      </Button>
+                    </div>
                   </FormControl>
 
                   <FormMessage />

@@ -26,6 +26,7 @@ function Authenticate() {
         <div className="space-y-2 flex flex-col items-center justify-center h-full w-full">
           <Button
             className="w-full"
+            variant="secondary"
             onClick={async () => {
               authClient.signIn.social({
                 provider: "google",
@@ -45,7 +46,7 @@ function Authenticate() {
         </div>
       </CardContent>
       <CardFooter>
-        <div className="pt-6">
+        <div className="pt-2">
           <div className="text-xs inline-block text-center text-pretty leading-5 tracking-wide">
             By continuing, you agree to {siteConfig.name}&apos;s{" "}
             <Link className="underline" href="/">

@@ -25,9 +25,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-screen">
+    <html lang="en" className="h-screen scheme-light">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased h-full font-sans flex flex-col overflow-y-auto`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased h-full font-sans scheme-light flex flex-col overflow-y-auto`}
       >
         <Navbar />
         <main className="grow bg-gradient-to-br from-neutral-50 to-neutral-100">

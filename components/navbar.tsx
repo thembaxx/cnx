@@ -1,6 +1,23 @@
-import { siteConfig } from "@/config/site";
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
+
+import { authClient } from "@/lib/auth-client";
+import { siteConfig } from "@/config/site";
+
 import { Button } from "./ui/button";
+
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const MenuIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
@@ -89,6 +106,40 @@ const UserCircleIcon = (props: React.SVGProps<SVGSVGElement>) => (
   </svg>
 );
 
+function ProfileMenu() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
+      <DropdownMenuTrigger asChild>
+        <Button className="p-0" variant="ghost">
+          <UserCircleIcon className="!w-6 !h-6" />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end" className="w-56">
+        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuGroup>
+          <DropdownMenuItem>Profile</DropdownMenuItem>
+          <DropdownMenuItem>Billing</DropdownMenuItem>
+          <DropdownMenuItem>Settings</DropdownMenuItem>
+        </DropdownMenuGroup>
+        <DropdownMenuSeparator />
+        <DropdownMenuGroup>
+          <DropdownMenuItem>My jobs</DropdownMenuItem>
+          <DropdownMenuItem>Find jobs</DropdownMenuItem>
+        </DropdownMenuGroup>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem>Support</DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem onClick={() => authClient.signOut()}>
+          Log out
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
+
 function Navbar() {
   return (
     <nav className="sticky top-0 z-20 bg-background/80 backdrop-blur-2xl h-16 shrink-0 flex justify-center">
@@ -105,9 +156,7 @@ function Navbar() {
           <Button className="p-0" variant="ghost">
             <NotificationIcon className="!w-6 !h-6" />
           </Button>
-          <Button className="p-0" variant="ghost">
-            <UserCircleIcon className="!w-6 !h-6" />
-          </Button>
+          <ProfileMenu />
         </div>
       </div>
     </nav>

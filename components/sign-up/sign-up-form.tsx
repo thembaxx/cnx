@@ -131,7 +131,7 @@ function SignUpForm() {
                 <FormControl>
                   <Input
                     placeholder="Doe"
-                    className="text-base placeholder:text-sm"
+                    className="text-base pr-12 placeholder:text-sm"
                     {...field}
                   />
                 </FormControl>
