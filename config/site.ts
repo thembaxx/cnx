@@ -3,7 +3,7 @@ export type SiteConfig = typeof siteConfig;
 export const siteConfig = {
   name: "Yunite",
   description: "Hire. Build. Simplify Your Home Construction Journey",
-  version: "0.0.0.25",
+  version: "0.0.0.26",
   baseUrl:
     process.env.NODE_ENV === "production"
       ? "https://cnx-two.vercel.app/"

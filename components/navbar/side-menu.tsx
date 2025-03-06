@@ -408,6 +408,7 @@ export function SideMenu({ children }: { children: React.ReactNode }) {
                 key={index}
                 href={href}
                 className="flex items-center gap-3 py-2.5"
+                onClick={() => setIsOpen(false)}
               >
                 <Icon />
                 <p className="font-medium">{label}</p>
@@ -429,6 +430,7 @@ export function SideMenu({ children }: { children: React.ReactNode }) {
                 key={index}
                 href={href}
                 className="flex items-center gap-2 py-2"
+                onClick={() => setIsOpen(false)}
               >
                 <Icon />
                 <p className="text-[0.85rem]">{label}</p>
