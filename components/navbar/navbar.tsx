@@ -1,22 +1,11 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
+import { Button } from "../ui/button";
 
-import { authClient } from "@/lib/auth-client";
 import { siteConfig } from "@/config/site";
-
-import { Button } from "./ui/button";
-
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { SideMenu } from "./side-menu";
+import { ProfileMenu } from "./profile-menu";
 
 const MenuIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
@@ -105,55 +94,16 @@ const UserCircleIcon = (props: React.SVGProps<SVGSVGElement>) => (
   </svg>
 );
 
-function ProfileMenu() {
-  const [isOpen, setIsOpen] = useState(false);
-
-  return (
-    <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
-      <DropdownMenuTrigger asChild>
-        <Button className="p-0" variant="ghost">
-          <UserCircleIcon className="!w-6 !h-6 !text-icon" />
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-56">
-        <DropdownMenuLabel>My Account</DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        <DropdownMenuGroup>
-          <DropdownMenuItem>Profile</DropdownMenuItem>
-          <DropdownMenuItem>Billing</DropdownMenuItem>
-          <DropdownMenuItem>Settings</DropdownMenuItem>
-        </DropdownMenuGroup>
-        <DropdownMenuSeparator />
-        <DropdownMenuGroup>
-          <DropdownMenuItem>My jobs</DropdownMenuItem>
-          <DropdownMenuItem>Find jobs</DropdownMenuItem>
-        </DropdownMenuGroup>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem>Support</DropdownMenuItem>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={() => authClient.signOut()}>
-          Log out
-        </DropdownMenuItem>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          <p className="text-xs text-muted-foreground">
-            {siteConfig.name} © <>{new Date().getFullYear()}</>{" "}
-            {` v${siteConfig.version}`}
-          </p>
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
-  );
-}
-
 function Navbar() {
   return (
     <nav className="sticky top-0 z-20 bg-background/80 backdrop-blur-2xl h-16 shrink-0 flex justify-center">
       <div className="w-full flex items-center px-4 justify-between max-w-2xl">
         <div className="flex items-center">
-          <Button className="p-0" variant="ghost">
-            <MenuIcon className="!w-6 !h-6 !text-icon" />
-          </Button>
+          <SideMenu>
+            <Button className="p-0" variant="ghost">
+              <MenuIcon className="!w-6 !h-6 !text-icon" />
+            </Button>
+          </SideMenu>
           <Link className="font-extrabold text-[0.90rem] uppercase" href="/">
             <span>{siteConfig.name}</span>
           </Link>
@@ -162,7 +112,11 @@ function Navbar() {
           <Button className="p-0" variant="ghost">
             <NotificationIcon className="!w-6 !h-6 !text-icon" />
           </Button>
-          <ProfileMenu />
+          <ProfileMenu>
+            <Button className="p-0" variant="ghost">
+              <UserCircleIcon className="!w-6 !h-6 !text-icon" />
+            </Button>
+          </ProfileMenu>
         </div>
       </div>
     </nav>
