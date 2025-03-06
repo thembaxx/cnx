@@ -27,6 +27,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="h-screen scheme-light">
+      <head>
+        <meta name="apple-mobile-web-app-title" content={siteConfig.name} />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased h-full font-sans scheme-light flex flex-col overflow-y-auto bg-gradient-to-tr from-neutral-50 to-gray-50`}
       >
