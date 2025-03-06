@@ -111,14 +111,14 @@ export default function ProfileForm() {
         </CardHeader>
         <CardContent>
           <div className="space-y-8">
-            <div className="flex flex-col items-center sm:flex-row gap-4">
+            <div className="flex flex-col items-center sm:flex-row sm:justify-center gap-4">
               <Avatar className="w-24 h-24">
                 <AvatarImage src={avatarSrc} alt="Profile picture" />
                 <AvatarFallback>
                   <User className="w-12 h-12" />
                 </AvatarFallback>
               </Avatar>
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col items-center md:items-start gap-2">
                 <Label htmlFor="avatar" className="text-sm font-medium">
                   Profile Picture
                 </Label>
