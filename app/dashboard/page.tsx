@@ -1,10 +1,13 @@
+import { Suspense } from "react";
 import Profile from "@/components/profile";
 
-function DashboardPage() {
+async function DashboardPage() {
   return (
-    <div className="p-6 h-full w-full space-y-16">
-      <Profile />
-    </div>
+    <Suspense fallback={<div>Loading...</div>}>
+      <div className="p-6 h-full w-full space-y-16">
+        <Profile />
+      </div>
+    </Suspense>
   );
 }
 

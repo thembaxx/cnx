@@ -1,12 +1,13 @@
 import { betterFetch } from "@better-fetch/fetch";
 import type { auth } from "@/lib/auth";
-import { NextResponse, type NextRequest } from "next/server";
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 import { NextURL } from "next/dist/server/web/next-url";
 import { isOnboardingComplete } from "./actions";
 
 type Session = typeof auth.$Infer.Session;
 
-export default async function authMiddleware(request: NextRequest) {
+export default async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   const { data, error } = await betterFetch<Session>("/api/auth/get-session", {
@@ -19,8 +20,12 @@ export default async function authMiddleware(request: NextRequest) {
 
   const session = data?.session;
 
+  let url: undefined | string;
+  console.log("hello");
+  console.log(error);
+
   if (!session && pathname !== "/") {
-    return NextResponse.redirect(new URL("/", request.url));
+    url = "/";
   } else if (session && !error) {
     if (pathname === "/") {
       if (data.user) {
@@ -40,10 +45,18 @@ export default async function authMiddleware(request: NextRequest) {
     }
   }
 
+  if (url) return NextResponse.redirect(new URL("/", request.url));
+
   return NextResponse.next();
 }
 
 // Protect sub-routes
 export const config = {
-  matcher: ["/login", "/dashboard", "/jobs", "/onboarding"],
+  matcher: [
+    "/",
+    "/login/:path",
+    "/dashboard/:path",
+    "/jobs/:path",
+    "/onboarding/:path",
+  ],
 };

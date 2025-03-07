@@ -210,7 +210,7 @@ function SignUpForm() {
             <span>Create free account</span>
             {loading && (
               <div className="absolute left-3">
-                <Loader variant="dark" />
+                <Loader />
               </div>
             )}
           </Button>
