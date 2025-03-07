@@ -402,19 +402,17 @@ export function SideMenu({ children }: { children: React.ReactNode }) {
 
           <Separator />
           <ul className="p-4">
-            {NavItems.map(
-              ({ Icon, href, label, requireVerification }, index) => (
-                <Link
-                  key={index}
-                  href={href}
-                  className={cn("flex items-center gap-3 py-2.5")}
-                  onClick={() => setIsOpen(false)}
-                >
-                  <Icon />
-                  <p className="font-medium">{label}</p>
-                </Link>
-              )
-            )}
+            {NavItems.map(({ Icon, href, label }, index) => (
+              <Link
+                key={index}
+                href={href}
+                className={cn("flex items-center gap-3 py-2.5")}
+                onClick={() => setIsOpen(false)}
+              >
+                <Icon />
+                <p className="font-medium">{label}</p>
+              </Link>
+            ))}
           </ul>
           <Separator />
           <div className="p-4 flex items-center gap-3">
@@ -427,19 +425,17 @@ export function SideMenu({ children }: { children: React.ReactNode }) {
 
         <SheetFooter className="space-y-4 pt-0">
           <ul>
-            {footerNavItems.map(
-              ({ Icon, href, label, requireVerification }, index) => (
-                <Link
-                  key={index}
-                  href={href}
-                  className={cn("flex items-center gap-2 py-2")}
-                  onClick={() => setIsOpen(false)}
-                >
-                  <Icon />
-                  <p className="text-[0.85rem]">{label}</p>
-                </Link>
-              )
-            )}
+            {footerNavItems.map(({ Icon, href, label }, index) => (
+              <Link
+                key={index}
+                href={href}
+                className={cn("flex items-center gap-2 py-2")}
+                onClick={() => setIsOpen(false)}
+              >
+                <Icon />
+                <p className="text-[0.85rem]">{label}</p>
+              </Link>
+            ))}
           </ul>
           <p className="text-[0.7rem] text-muted-foreground">
             {siteConfig.name} © <>{new Date().getFullYear()}</>{" "}
