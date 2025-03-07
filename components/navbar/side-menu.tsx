@@ -24,7 +24,6 @@ import {
 import { Separator } from "../ui/separator";
 import Profile from "../profile";
 import ThemeSwitcher from "../theme-switch";
-import { useUserStore } from "@/stores/use-user-store";
 import { cn } from "@/lib/utils";
 
 const SettingsIcon = (props: React.SVGProps<SVGSVGElement>) => (
@@ -385,8 +384,6 @@ const footerNavItems: NavItem[] = [
 ];
 
 export function SideMenu({ children }: { children: React.ReactNode }) {
-  const { user } = useUserStore();
-
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -399,21 +396,18 @@ export function SideMenu({ children }: { children: React.ReactNode }) {
           </VisuallyHidden>
         </SheetHeader>
         <div className="grow space-y-0 overflow-y-auto">
-          {user && (
-            <div className="p-4 pt-0">
-              <Profile />
-            </div>
-          )}
-          {user && <Separator />}
+          <div className="p-4 pt-0">
+            <Profile />
+          </div>
+
+          <Separator />
           <ul className="p-4">
             {NavItems.map(
               ({ Icon, href, label, requireVerification }, index) => (
                 <Link
                   key={index}
                   href={href}
-                  className={cn("flex items-center gap-3 py-2.5", {
-                    hidden: !!requireVerification && !user,
-                  })}
+                  className={cn("flex items-center gap-3 py-2.5")}
                   onClick={() => setIsOpen(false)}
                 >
                   <Icon />
@@ -438,9 +432,7 @@ export function SideMenu({ children }: { children: React.ReactNode }) {
                 <Link
                   key={index}
                   href={href}
-                  className={cn("flex items-center gap-2 py-2", {
-                    hidden: !!requireVerification && !user,
-                  })}
+                  className={cn("flex items-center gap-2 py-2")}
                   onClick={() => setIsOpen(false)}
                 >
                   <Icon />

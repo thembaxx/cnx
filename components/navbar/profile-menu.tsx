@@ -15,11 +15,8 @@ import {
 import { authClient } from "@/lib/auth-client";
 import Profile from "../profile";
 import Link from "next/link";
-import { useUserStore } from "@/stores/use-user-store";
 
 export function ProfileMenu({ children }: { children: React.ReactNode }) {
-  const { clearUser } = useUserStore();
-
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -42,7 +39,6 @@ export function ProfileMenu({ children }: { children: React.ReactNode }) {
         <DropdownMenuSeparator />
         <DropdownMenuItem
           onClick={async () => {
-            clearUser();
             await authClient.signOut();
           }}
         >
