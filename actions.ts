@@ -37,7 +37,7 @@ export async function completedOnboarding(email: string) {
     const client = await db.connect();
     await client.connect();
     await client.sql`UPDATE "user"
-          SET "onboardingComplete" = 'TRUE'
+          SET "onboardingComplete" = 'true'
           WHERE "email" = ${email};`;
 
     client.release();

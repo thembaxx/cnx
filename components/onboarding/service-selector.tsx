@@ -28,9 +28,7 @@ export default function ServiceSelector() {
   return (
     <div className="flex items-center justify-center w-full">
       <div className="w-full max-w-md space-y-6">
-        <h1 className="scroll-m-20 text-xl font-extrabold tracking-tight lg:text-5xl">
-          What would like to do?
-        </h1>
+        <Label>Register as</Label>
         <RadioGroup
           value={currentValue}
           onValueChange={setCurrentValue}
