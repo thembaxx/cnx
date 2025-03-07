@@ -7,12 +7,10 @@ import {
   useImperativeHandle,
   useMemo,
   useState,
+  useRef,
 } from "react";
-import { motion, AnimatePresence, Transition, Variant } from "framer-motion";
 
-function cn(...classes: string[]): string {
-  return classes.filter(Boolean).join(" ");
-}
+import { motion, AnimatePresence, Transition, Variant } from "framer-motion";
 
 interface WordObject {
   characters: string[];
@@ -71,9 +69,12 @@ const RotatingText = forwardRef<RotatingTextRef, RotatingTextProps>(
       ...rest
     } = props;
 
+    const cn = useCallback((...classes: string[]): string => {
+      return classes.filter(Boolean).join(" ");
+    }, []);
     const [currentTextIndex, setCurrentTextIndex] = useState<number>(0);
 
-    const splitIntoCharacters = (text: string): string[] => {
+    const splitIntoCharacters = useCallback((text: string): string[] => {
       if (typeof Intl !== "undefined" && Intl.Segmenter) {
         const segmenter = new Intl.Segmenter("en", { granularity: "grapheme" });
         return Array.from(
@@ -82,14 +83,23 @@ const RotatingText = forwardRef<RotatingTextRef, RotatingTextProps>(
         );
       }
       return Array.from(text);
-    };
+    }, []);
+
+    const currentText = texts[currentTextIndex] as string;
+
+    const splitTextCharacters = useMemo(
+      () =>
+        splitBy === "characters"
+          ? currentText.split(" ").map((word) => splitIntoCharacters(word))
+          : [],
+      [splitIntoCharacters, currentText, splitBy]
+    );
 
     const elements = useMemo<WordObject[]>(() => {
-      const currentText = texts[currentTextIndex] as string;
       if (splitBy === "characters") {
         const words = currentText.split(" ");
-        return words.map((word, i) => ({
-          characters: splitIntoCharacters(word),
+        return words.map((_, i) => ({
+          characters: splitTextCharacters[i],
           needsSpace: i !== words.length - 1,
         }));
       }
@@ -110,29 +120,46 @@ const RotatingText = forwardRef<RotatingTextRef, RotatingTextProps>(
         characters: [part],
         needsSpace: i !== arr.length - 1,
       }));
-    }, [texts, currentTextIndex, splitBy]);
+    }, [texts, currentTextIndex, splitBy, splitTextCharacters]);
+
+    const delayMapRef = useRef<Map<string, number>>(new Map());
 
     const getStaggerDelay = useCallback(
       (index: number, totalChars: number): number => {
+        const key = `${index}-${totalChars}-${staggerFrom}-${staggerDuration}`;
+
+        if (delayMapRef.current.has(key)) {
+          return delayMapRef.current.get(key)!; // Use the cached value
+        }
+
         const total = totalChars;
-        if (staggerFrom === "first") return index * staggerDuration;
-        if (staggerFrom === "last")
-          return (total - 1 - index) * staggerDuration;
-        if (staggerFrom === "center") {
+        let delay: number = 0;
+        if (staggerFrom === "first") delay = index * staggerDuration;
+        else if (staggerFrom === "last")
+          delay = (total - 1 - index) * staggerDuration;
+        else if (staggerFrom === "center") {
           const center = Math.floor(total / 2);
-          return Math.abs(center - index) * staggerDuration;
-        }
-        if (staggerFrom === "random") {
+          delay = Math.abs(center - index) * staggerDuration;
+        } else if (staggerFrom === "random") {
           const randomIndex = Math.floor(Math.random() * total);
-          return Math.abs(randomIndex - index) * staggerDuration;
+          delay = Math.abs(randomIndex - index) * staggerDuration;
+        } else {
+          delay =
+            Math.abs(
+              typeof staggerFrom === "number" ? staggerFrom : 0 - index
+            ) * staggerDuration;
         }
-        return (
-          Math.abs(typeof staggerFrom === "number" ? staggerFrom : 0 - index) *
-          staggerDuration
-        );
+
+        delayMapRef.current.set(key, delay); // Cache the value
+        return delay;
       },
       [staggerFrom, staggerDuration]
     );
+
+    // Clear the cache when elements or the stagger configuration changes
+    useEffect(() => {
+      delayMapRef.current.clear();
+    }, [elements, staggerFrom, staggerDuration]);
 
     const handleIndexChange = useCallback(
       (newIndex: number) => {
