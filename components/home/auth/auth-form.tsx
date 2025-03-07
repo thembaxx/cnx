@@ -26,6 +26,7 @@ import PasswordReset from "@/components/password-reset/password-reset";
 import { SolarQuestionCircleLinear } from "@/lib/icons";
 import Loader from "@/components/ui/loader";
 import Image from "next/image";
+import { useUserStore } from "@/stores/use-user-store";
 
 const FormSchema = z.object({
   email: z.string().email(),
@@ -34,6 +35,7 @@ const FormSchema = z.object({
 
 function AuthForm() {
   const router = useRouter();
+  const { setUser } = useUserStore();
 
   const [loading, setLoading] = useState(false);
   const [emailExists, setEmailExists] = useState(false);
@@ -54,7 +56,7 @@ function AuthForm() {
     setLoading(true);
 
     if (emailExists && password) {
-      const { error } = await authClient.signIn.email({
+      const { data, error } = await authClient.signIn.email({
         email,
         password,
       });
@@ -69,6 +71,9 @@ function AuthForm() {
           description: `Logged in as ${email}`,
           richColors: true,
         });
+
+        const user = data?.user;
+        setUser(user);
 
         router.replace("/dashboard");
       }
@@ -162,7 +167,7 @@ function AuthForm() {
         <Button className="w-full relative" type="submit">
           {loading && (
             <div className="absolute left-3">
-              <Loader variant="dark" />
+              <Loader />
             </div>
           )}
           <>{`${emailExists ? "Sign In" : "Continue with Email"}`}</>

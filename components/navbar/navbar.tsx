@@ -9,6 +9,7 @@ import { ProfileMenu } from "./profile-menu";
 
 import React from "react";
 import type { SVGProps } from "react";
+import { useUserStore } from "@/stores/use-user-store";
 
 export function MenuIcon(props: SVGProps<SVGSVGElement>) {
   return (
@@ -94,6 +95,8 @@ const UserCircleIcon = (props: React.SVGProps<SVGSVGElement>) => (
 );
 
 function Navbar() {
+  const { user } = useUserStore();
+
   return (
     <nav className="sticky top-0 z-20 bg-background/80 backdrop-blur-2xl h-16 shrink-0 flex justify-center">
       <div className="w-full flex items-center px-4 justify-between max-w-2xl">
@@ -107,16 +110,18 @@ function Navbar() {
             <span>{siteConfig.name}</span>
           </Link>
         </div>
-        <div className="flex items-center gap-2">
-          <Button className="p-0" variant="ghost">
-            <NotificationIcon className="!w-6 !h-6 !text-icon" />
-          </Button>
-          <ProfileMenu>
+        {user && (
+          <div className="flex items-center gap-2">
             <Button className="p-0" variant="ghost">
-              <UserCircleIcon className="!w-6 !h-6 !text-icon" />
+              <NotificationIcon className="!w-6 !h-6 !text-icon" />
             </Button>
-          </ProfileMenu>
-        </div>
+            <ProfileMenu>
+              <Button className="p-0" variant="ghost">
+                <UserCircleIcon className="!w-6 !h-6 !text-icon" />
+              </Button>
+            </ProfileMenu>
+          </div>
+        )}
       </div>
     </nav>
   );

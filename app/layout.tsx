@@ -30,6 +30,10 @@ export default function RootLayout({
     <html suppressHydrationWarning lang="en">
       <head>
         <meta name="apple-mobile-web-app-title" content={siteConfig.name} />
+        <script
+          crossOrigin="anonymous"
+          src="//unpkg.com/react-scan/dist/auto.global.js"
+        />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} bg-[#fafafa] dark:bg-[#0e0e0e] antialiased font-sans flex flex-col overflow-y-auto h-screen selection:bg-blue-300`}

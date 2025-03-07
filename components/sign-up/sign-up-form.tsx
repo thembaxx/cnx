@@ -43,7 +43,7 @@ function SignUpForm() {
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    disabled: loading,
+    // disabled: loading,
     defaultValues: {
       first_name: "",
       last_name: "",

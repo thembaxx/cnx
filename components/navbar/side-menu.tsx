@@ -4,6 +4,7 @@ interface NavItem {
   Icon: React.JSX.ElementType;
   href: string;
   label: string;
+  requireVerification?: boolean;
 }
 
 import React, { useState } from "react";
@@ -23,6 +24,8 @@ import {
 import { Separator } from "../ui/separator";
 import Profile from "../profile";
 import ThemeSwitcher from "../theme-switch";
+import { useUserStore } from "@/stores/use-user-store";
+import { cn } from "@/lib/utils";
 
 const SettingsIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
@@ -337,11 +340,13 @@ const NavItems: NavItem[] = [
     Icon: UserIcon,
     href: "/profile",
     label: "Profile",
+    requireVerification: true,
   },
   {
     Icon: DashboardCircleIcon,
     href: "/dashboard",
     label: "Dashboard",
+    requireVerification: true,
   },
   {
     Icon: BriefcaseIcon,
@@ -375,10 +380,13 @@ const footerNavItems: NavItem[] = [
     Icon: SettingDoneIcon,
     href: "/account",
     label: "Account settings",
+    requireVerification: true,
   },
 ];
 
 export function SideMenu({ children }: { children: React.ReactNode }) {
+  const { user } = useUserStore();
+
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -391,22 +399,28 @@ export function SideMenu({ children }: { children: React.ReactNode }) {
           </VisuallyHidden>
         </SheetHeader>
         <div className="grow space-y-0 overflow-y-auto">
-          <div className="p-4 pt-0">
-            <Profile />
-          </div>
-          <Separator />
+          {user && (
+            <div className="p-4 pt-0">
+              <Profile />
+            </div>
+          )}
+          {user && <Separator />}
           <ul className="p-4">
-            {NavItems.map(({ Icon, href, label }, index) => (
-              <Link
-                key={index}
-                href={href}
-                className="flex items-center gap-3 py-2.5"
-                onClick={() => setIsOpen(false)}
-              >
-                <Icon />
-                <p className="font-medium">{label}</p>
-              </Link>
-            ))}
+            {NavItems.map(
+              ({ Icon, href, label, requireVerification }, index) => (
+                <Link
+                  key={index}
+                  href={href}
+                  className={cn("flex items-center gap-3 py-2.5", {
+                    hidden: !!requireVerification && !user,
+                  })}
+                  onClick={() => setIsOpen(false)}
+                >
+                  <Icon />
+                  <p className="font-medium">{label}</p>
+                </Link>
+              )
+            )}
           </ul>
           <Separator />
           <div className="p-4 flex items-center gap-3">
@@ -419,19 +433,23 @@ export function SideMenu({ children }: { children: React.ReactNode }) {
 
         <SheetFooter className="space-y-4 pt-0">
           <ul>
-            {footerNavItems.map(({ Icon, href, label }, index) => (
-              <Link
-                key={index}
-                href={href}
-                className="flex items-center gap-2 py-2"
-                onClick={() => setIsOpen(false)}
-              >
-                <Icon />
-                <p className="text-[0.85rem]">{label}</p>
-              </Link>
-            ))}
+            {footerNavItems.map(
+              ({ Icon, href, label, requireVerification }, index) => (
+                <Link
+                  key={index}
+                  href={href}
+                  className={cn("flex items-center gap-2 py-2", {
+                    hidden: !!requireVerification && !user,
+                  })}
+                  onClick={() => setIsOpen(false)}
+                >
+                  <Icon />
+                  <p className="text-[0.85rem]">{label}</p>
+                </Link>
+              )
+            )}
           </ul>
-          <p className="text-xs text-muted-foreground">
+          <p className="text-[0.7rem] text-muted-foreground">
             {siteConfig.name} © <>{new Date().getFullYear()}</>{" "}
             {` v${siteConfig.version}`}
           </p>

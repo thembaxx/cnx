@@ -33,7 +33,7 @@ function Profile() {
             />
             <AvatarFallback className="text-sm">TP</AvatarFallback>
           </Avatar>
-          <div className="absolute bottom-0 right-0 z-10">
+          <div className="absolute -mb-0.5 bottom-0 right-0 z-10">
             <MaterialSymbolsVerifiedRounded className="text-blue-600 w-5 h-5" />
           </div>
         </div>
