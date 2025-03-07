@@ -1,4 +1,6 @@
 import Image from "next/image";
+import { Button } from "../ui/button";
+import { siteConfig } from "@/config/site";
 
 const items: { imageUrl: string; label: string }[] = [
   {
@@ -7,7 +9,7 @@ const items: { imageUrl: string; label: string }[] = [
   },
   {
     imageUrl: "/jobs/electric plug.png",
-    label: "Electrician",
+    label: "Wiring",
   },
   {
     imageUrl: "/jobs/taxi.png",
@@ -22,6 +24,10 @@ const items: { imageUrl: string; label: string }[] = [
     label: "Plumbing",
   },
   {
+    imageUrl: "/jobs/light bulb.png",
+    label: "Electrician",
+  },
+  {
     imageUrl: "/jobs/clamp.png",
     label: "Piping",
   },
@@ -29,11 +35,24 @@ const items: { imageUrl: string; label: string }[] = [
     imageUrl: "/jobs/label.png",
     label: "Other",
   },
+  {
+    imageUrl: "/jobs/door.png",
+    label: "Doors",
+  },
+  {
+    imageUrl: "/jobs/locked with key.png",
+    label: "Locksmith",
+  },
+  {
+    imageUrl: "/jobs/toolbox.png",
+    label: "Mechanic",
+  },
 ];
 
 function Header() {
   return (
-    <div>
+    <div className="space-y-6">
+      <h1 className="font-bold text-xl">Top Searches</h1>
       <ul className="flex gap-3 flex-wrap">
         {items.map(({ imageUrl, label }, index) => (
           <li key={index}>
@@ -46,6 +65,14 @@ function Header() {
           </li>
         ))}
       </ul>
+      <div>
+        <Button
+          className="text-sm font-semibold text-[#0D8C7D] px-0"
+          variant="link"
+        >
+          Sell all the services we suoport at {siteConfig.name}
+        </Button>
+      </div>
     </div>
   );
 }
