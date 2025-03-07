@@ -7,44 +7,6 @@ export const exampleFlag = flag({
   },
 });
 
-const headlines = [
-  {
-    label: "Professional",
-    value: {
-      headline: "Unify: Precision Workforce for Your Construction Vision",
-      subheadline: "Expert Talent. Seamless Hiring. Perfect Projects.",
-    },
-  },
-  {
-    label: "Modern",
-    value: {
-      headline: "Unify: Build Your Dream, One Expert at a Time",
-      subheadline: "Marketplace Technology Meets Construction Craftsmanship",
-    },
-  },
-  {
-    label: "Empowering",
-    value: {
-      headline: "Unify: Connecting Builders, Transforming Spaces",
-      subheadline: "Your Project. Your Team. Simplified.",
-    },
-  },
-  {
-    label: "Dynamic",
-    value: {
-      headline: "Unify: Craft Your Construction Crew Instantly",
-      subheadline: "Skills Matched. Projects Accelerated. Goals Achieved.",
-    },
-  },
-  {
-    label: "Innovative",
-    value: {
-      headline: "Unify: The Construction Talent Network",
-      subheadline: "Intelligent Matching. Exceptional Results.",
-    },
-  },
-];
-
 export const headlineFlag = flag<string>({
   key: "heading",
   options: [

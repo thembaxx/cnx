@@ -120,7 +120,7 @@ const RotatingText = forwardRef<RotatingTextRef, RotatingTextProps>(
         characters: [part],
         needsSpace: i !== arr.length - 1,
       }));
-    }, [texts, currentTextIndex, splitBy, splitTextCharacters]);
+    }, [currentText, splitBy, splitTextCharacters]);
 
     const delayMapRef = useRef<Map<string, number>>(new Map());
 

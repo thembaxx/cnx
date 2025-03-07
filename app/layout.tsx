@@ -6,6 +6,8 @@ import { Toaster } from "sonner";
 import { siteConfig } from "@/config/site";
 import { Providers } from "./providers";
 
+import { VercelToolbar } from "@vercel/toolbar/next";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -26,14 +28,16 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const shouldInjectToolbar = process.env.NODE_ENV === "development";
+
   return (
     <html suppressHydrationWarning lang="en">
       <head>
         <meta name="apple-mobile-web-app-title" content={siteConfig.name} />
-        <script
+        {/* <script
           crossOrigin="anonymous"
           src="//unpkg.com/react-scan/dist/auto.global.js"
-        />
+        /> */}
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} bg-[#fafafa] dark:bg-[#0e0e0e] antialiased font-sans flex flex-col overflow-y-auto h-screen selection:bg-blue-300`}
@@ -50,6 +54,7 @@ export default function RootLayout({
             <Navbar />
             <main className="grow">{children}</main>
             <Toaster />
+            {shouldInjectToolbar && <VercelToolbar />}
           </>
         </Providers>
       </body>
