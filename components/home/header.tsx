@@ -61,7 +61,7 @@ function Header({ headline, subheadline }: Props) {
     <header className="flex flex-col items-center space-y-8">
       <div className="pb-8 flex items-center gap-1">
         <div className="w-9 h-9 flex items-center justify-center">
-          <Image src="yunite.svg" height={24} width={24} alt="" />
+          <Image src="/yunite.svg" height={24} width={24} alt="" />
         </div>
         <p className="font-medium">{siteConfig.name}</p>
       </div>
