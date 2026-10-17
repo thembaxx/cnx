@@ -1,3 +1,23 @@
+# CNX
+
+A Next.js authentication interface with configurable headline and subheadline flags.
+
+[Browse the source](https://github.com/thembaxx/cnx)
+
+## Engineering highlights
+
+Asynchronous feature-flag reads, Suspense and composed authentication UI. Production identity-provider configuration is not verified.
+
+## Technology
+
+Declared in [package.json](package.json): Next.js `15.5.24` · React `^19.1.0` · TypeScript `^5.8.3` · Tailwind CSS `^4.1.3` · Framer Motion `^12.6.3` · Better Auth `^1.6.22` · Zod `^3.24.2`.
+
+**Quality tooling:** `lint` scripts are available. See the setup guide below for prerequisites; this documentation pass does not assert that those checks were run.
+
+---
+
+## Project guide
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
